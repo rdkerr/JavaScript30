@@ -61,14 +61,17 @@
   function playSound(e) {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-    console.log("TCL: key", key)
+    // If no matching audio element found
     if(!audio) return;
+    // Restart the sound, so you can click multiple times
     audio.currentTime = 0;
     audio.play();
+    // Add css effects to be taken off by eventListener
     key.classList.add('playing')
   }
 
   function removeTransmission(e) {
+    // Transform is the slowest so we wait for it to finish
     if (e.propertyName !== 'transform') return;
     this.classList.remove('playing')
   }
